@@ -1,4 +1,4 @@
-function checkForName(inputText) {
+function checkForName(destination, date) {
   console.log("::: Running checkForName :::", inputText);
   let names = ["Picard", "Janeway", "Kirk", "Archer", "Georgiou"];
 

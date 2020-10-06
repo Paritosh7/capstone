@@ -1,6 +1,7 @@
 var path = require("path");
 const express = require("express");
-const mockAPIResponse = require("./mockAPI.js");
+require("dotenv").config();
+const fetch = require("node-fetch");
 
 const app = express();
 
@@ -28,6 +29,11 @@ app.listen(8081, function () {
   console.log("Example app listening on port 8081!");
 });
 
-app.get("/test", function (req, res) {
-  res.send(mockAPIResponse);
+app.get("/get/:text", async (req, res) => {
+  const destination = req.params.text;
+  console.log(destination);
+  const api_url = `http://api.geonames.org/searchJSON?q=${destination}&maxRows=2&username=${process.env.GEONAMES_KEY}`;
+  const fetchResponse = await fetch(api_url);
+  const json = await fetchResponse.json();
+  res.json(json);
 });
