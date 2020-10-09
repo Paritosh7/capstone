@@ -20,11 +20,12 @@ function handleSubmit(event) {
   // // Client.checkForName(destination, date);
 
   console.log("::: Form Submitted :::");
-  fetch(`http://localhost:8081/get/${destination}`)
+  fetch(`http://localhost:8081/get/?destination=${destination}&date=${date}`)
     .then((res) => res.json())
     .then(function (res) {
       console.log(res);
-    });
+    })
+    .catch((err) => console.log(err.message));
 }
 
 export { handleSubmit };
