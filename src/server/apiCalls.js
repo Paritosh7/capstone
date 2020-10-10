@@ -11,14 +11,22 @@ async function fetchResponse(destination, date) {
   console.log(lat);
 
   const currentWeatherData = await fetchCurrentWeatherData(lat, long);
-  console.log(currentWeatherData);
+
   const weatherForecastData = await fetchWeatherForecast(lat, long);
-  console.log(weatherForecastData);
+
   const pixabayData = await fetchPixabayData(destination);
-  console.log(pixabayData);
+
   const countryData = await fetchCountryData(coordinatesData.countryCode);
-  console.log(countryData);
-  return coordinatesData;
+
+  /** converting weatherForecastData to an object */
+  const weatherForecastDataObj = Object.assign({}, weatherForecastData);
+  return {
+    destination,
+    currentWeatherData,
+    weatherForecastDataObj,
+    pixabayData,
+    countryData,
+  };
 }
 
 async function fetchGeoCoordinatesData(destination) {

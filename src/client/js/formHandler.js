@@ -9,21 +9,11 @@ function handleSubmit(event) {
   console.log(destination);
   console.log(date);
 
-  // // date in yyyy-mm-dd format
-  // let parts = date.split("-");
-  // console.log(parts);
-
-  // let newDate = new Date(parts[0], parts[1] - 1, parts[2]);
-  // console.log(newDate);
-  // console.log(typeof destination);
-  // console.log(typeof date);
-  // // Client.checkForName(destination, date);
-
   console.log("::: Form Submitted :::");
   fetch(`http://localhost:8081/get/?destination=${destination}&date=${date}`)
     .then((res) => res.json())
     .then(function (res) {
-      console.log(res);
+      Client.updateUI(res);
     })
     .catch((err) => console.log(err.message));
 }
