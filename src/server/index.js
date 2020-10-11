@@ -37,8 +37,8 @@ app.get("/get", async (req, res) => {
   console.log(date);
   try {
     const jsonResponse = await apiCalls.fetchResponse(destination, date);
-    res.json(jsonResponse);
+    res.json({ jsonResponse: jsonResponse, flag: true });
   } catch (err) {
-    res.json({ err: err.message });
+    res.json({ jsonResponse: err.message, flag: false });
   }
 });

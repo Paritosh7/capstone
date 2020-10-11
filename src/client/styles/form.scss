@@ -1,12 +1,35 @@
 form {
-  border: 1px solid #545454;
-  border-radius: 3px;
-  padding: 40px;
+  border: 0.007px solid #545454;
+  border-radius: 2px;
+  width: 90%;
+  padding: 2em;
+  margin: 0 auto;
+
+  div {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+
+    label {
+      display: block;
+    }
+
+    #date,
+    #destination {
+      display: block;
+      width: 35%;
+      border: 0.1px solid #545454;
+    }
+  }
 }
 
 input {
   padding: 5px 20px;
   width: 100%;
-  line-height: 16px;
   margin: 10px 0;
+  padding: 0.5em;
+  border: none;
+  font-size: 0.9em;
+  border-radius: 0.3em;
 }

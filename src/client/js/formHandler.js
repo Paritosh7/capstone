@@ -14,8 +14,12 @@ async function handleSubmit(event) {
     `http://localhost:8081/get/?destination=${destination}&date=${date}`
   )
     .then((res) => res.json())
-    .then((response) => Client.updateUIForValidResponse(response))
-    .catch(() => Client.updateUIForError());
+    .then((response) => {
+      console.log(response.flag);
+      if (response.flag) Client.updateUIForValidResponse(response.jsonResponse);
+      else throw new Error(response.jsonResponse);
+    })
+    .catch((err) => Client.updateUIForError(err));
 }
 
 export { handleSubmit };

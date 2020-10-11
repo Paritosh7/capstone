@@ -1,13 +1,17 @@
 let responseSection = document.getElementById("response-section");
+let weatherForecastSection = document.getElementById("weather-forecast");
 
 function updateUIForValidResponse(res) {
   console.log(res);
-  let weatherForecastSection = document.getElementById("weather-forecast");
+  weatherForecastSection.style.display = "block";
+
   let documentFragment = document.createDocumentFragment();
 
   const weatherListDocumentFragment = createWeatherForecastDiv(res);
 
-  responseSection.innerHTML = `<h1 id="destination">${res.destination}</h1>
+  responseSection.innerHTML = `
+                <div id="response-div>
+                <h1 id="destination">${res.destination}</h1>
                 <div class="image-container">
                     <img src="${res.pixabayData}" alt="" srcset="">
                 </div>
@@ -27,7 +31,8 @@ function updateUIForValidResponse(res) {
                     <p>Capital: ${res.countryData.capital}</p>
                     <p>Currency : ${res.countryData.currency}</p>
                 </div>
-                <div class="weather-forecast-data"></div>`;
+                <div class="weather-forecast-data"></div>
+                </div>`;
 
   documentFragment.appendChild(weatherListDocumentFragment);
   weatherForecastSection.appendChild(documentFragment);
@@ -53,7 +58,9 @@ function createWeatherForecastDiv(res) {
   return weatherListDocumentFragment;
 }
 
-function updateUIForError() {
+function updateUIForError(err) {
+  weatherForecastSection.style.display = "none";
+  console.log(err);
   responseSection.innerHTML = ` <div id="error">
     <h3>We are sorry! This shouldn't have happened</h3>
     <ul>Please make sure the following

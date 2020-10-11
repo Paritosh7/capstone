@@ -10,15 +10,19 @@
         <main>
             <section>
                 <form id="form">
-                    <label for="destination">Look for </label>
-                    <input type="text" id="destination" placeholder="Enter destination" required>
+                    <div id="form-input-div">
+                        <label for="destination">Look for </label>
+                        <input type="text" id="destination" placeholder="Enter destination" required>
 
-                    <label for="date">Departing on </label>
-                    <input type="date" id="date" placeholder="YYYY-MM-DD" required required pattern="\d{4}-\d{2}-\d{2}">
+                        <label for="date">Departing on </label>
+                        <input type="date" id="date" placeholder="YYYY-MM-DD" required required pattern="\d{4}-\d{2}-\d{2}">
 
-                    <span id="cross-browser-date-message"></span>
+                    </div>
 
-                    <input type="submit" name="" value="submit">
+                        <span id="cross-browser-date-message"></span>
+
+                        <input type="submit" name="" value="Search">
+                    
                 </form>
             <section>
         </main>

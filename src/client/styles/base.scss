@@ -1,16 +1,4 @@
-$min-ht: 100vh;
-
 body {
-  display: flex;
-  flex-direction: column;
-  min-height: $min-ht;
-}
-
-main {
-  flex: 2;
-}
-
-section {
-  max-width: 800px;
-  margin: 50px auto;
+  padding: 0;
+  margin: 2em;
 }
