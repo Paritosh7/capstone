@@ -39,6 +39,6 @@ app.get("/get", async (req, res) => {
     const jsonResponse = await apiCalls.fetchResponse(destination, date);
     res.json(jsonResponse);
   } catch (err) {
-    res.json({ message: "Something went wrong, please try again later!" });
+    res.json({ err: err.message });
   }
 });

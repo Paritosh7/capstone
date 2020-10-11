@@ -1,7 +1,6 @@
-function handleSubmit(event) {
+async function handleSubmit(event) {
   event.preventDefault();
 
-  console.log("inside handle submit");
   // check what text was put into the form field
   let destination = document.getElementById("destination").value;
   let date = document.getElementById("date").value;
@@ -10,12 +9,13 @@ function handleSubmit(event) {
   console.log(date);
 
   console.log("::: Form Submitted :::");
-  fetch(`http://localhost:8081/get/?destination=${destination}&date=${date}`)
+
+  await fetch(
+    `http://localhost:8081/get/?destination=${destination}&date=${date}`
+  )
     .then((res) => res.json())
-    .then(function (res) {
-      Client.updateUI(res);
-    })
-    .catch((err) => console.log(err.message));
+    .then((response) => Client.updateUIForValidResponse(response))
+    .catch(() => Client.updateUIForError());
 }
 
 export { handleSubmit };

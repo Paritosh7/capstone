@@ -1,3 +1,5 @@
+/** returns an array of min and max date string allowed. */
+
 function minMaxDateString(minDate, maxDate) {
   var ddMin = String(minDate.getDate()).padStart(2, "0");
   var mmMin = String(minDate.getMonth() + 1).padStart(2, "0"); //January is 0!
@@ -13,10 +15,11 @@ function minMaxDateString(minDate, maxDate) {
   return [minDateString, maxDateString];
 }
 
+/** returns number of days left for the trip */
 function numberOfDaysLeft(minDate, maxDate) {
   let difference = maxDate.getTime() - minDate.getTime();
 
-  /** converting milliseconds so we are converting it into days here. */
+  /** in milliseconds, so we are converting it into days here. */
   return Math.ceil(difference / (1000 * 3600 * 24));
 }
 
