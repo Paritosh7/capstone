@@ -7,9 +7,9 @@ import {
 } from "./js/crossBrowserDateHandling";
 import "./styles/base.scss";
 import "./styles/weather-card.scss";
-import "./styles/footer.scss";
 import "./styles/form.scss";
-import "./styles/header.scss";
+import "./styles/error.scss";
+import "./styles/multiple-weather-card.scss";
 
 /** - getting the form element.
  *  - getting today's date.

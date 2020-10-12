@@ -1,8 +1,8 @@
 form {
-  border: 0.007px solid #545454;
+  border: 0.007px solid #d6e0f0;
   border-radius: 2px;
   width: 90%;
-  padding: 2em;
+  padding: 1em;
   margin: 0 auto;
 
   div {
@@ -19,7 +19,7 @@ form {
     #destination {
       display: block;
       width: 35%;
-      border: 0.1px solid #545454;
+      border: 0.1px solid #d6e0f0;
     }
   }
 }
@@ -32,4 +32,34 @@ input {
   border: none;
   font-size: 0.9em;
   border-radius: 0.3em;
+  color: #43658b;
+}
+
+@media (max-width: 800px) {
+  form {
+    div {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+
+      label {
+        display: block;
+        width: 97%;
+        text-align: left;
+      }
+
+      #date,
+      #destination {
+        display: block;
+        width: 95%;
+        border: 0.1px solid #d6e0f0;
+      }
+    }
+  }
+  input {
+    display: block;
+    width: 95%;
+    margin: 10px auto;
+    padding: 0.5em;
+  }
 }

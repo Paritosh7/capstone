@@ -3,54 +3,70 @@ let weatherForecastSection = document.getElementById("weather-forecast");
 
 function updateUIForValidResponse(res) {
   console.log(res);
-  weatherForecastSection.style.display = "block";
+  weatherForecastSection.style.display = "grid";
 
   let documentFragment = document.createDocumentFragment();
 
   const weatherListDocumentFragment = createWeatherForecastDiv(res);
 
   responseSection.innerHTML = `
-                <div id="response-div>
-                <h1 id="destination">${res.destination}</h1>
-                <div class="image-container">
-                    <img src="${res.pixabayData}" alt="" srcset="">
-                </div>
-                <div class="current-container">
-                    <h2>Today's weather</h2>
-                    <ul>
-                        <li>${res.currentWeatherData.description}</li>
-                        <li>${res.currentWeatherData.airQuality}</li>
-                        <li>${res.currentWeatherData.temperature}</li>
-                        <li>${res.currentWeatherData.visibility}</li>
-                    </ul>
-                </div>
-                <div class="country-data">
-                    <h3>${res.countryData.countryName}</h3>
-                    <img src="${res.countryData.flag}" alt="" srcset="">
-                    <p>${res.countryData.countryName} is in ${res.countryData.region} and has a population of over ${res.countryData.population}, with ${res.countryData.primaryLanguage} as the country's most commonly spoken language.</p>
-                    <p>Capital: ${res.countryData.capital}</p>
-                    <p>Currency : ${res.countryData.currency}</p>
-                </div>
-                <div class="weather-forecast-data"></div>
+                <div id="response-div">
+                  <div id="top">
+                    <h3 id="destination">Your trip to ${res.destination}, 
+                    <span style="text-transform:uppercase;">${res.countryData.countryName}</span>
+                    </h3>
+                    <img style="width :20px ; height:20px;"src="${res.countryData.flag}" alt="" srcset="">
+                  </div>
+                
+                  <div id="middle">
+                    <div class="image-container">
+                    <img id="pixabay-image" src="${res.pixabayData}" alt="" srcset="">
+                    </div>
+                    <div class="current-container">
+                      <h2>Today's weather</h2>
+                        <ul>
+                          <li>Current Temperature : ${res.currentWeatherData.temperature}</li>
+                          <li>Visibility : ${res.currentWeatherData.visibility}</li>
+                          <li>${res.currentWeatherData.description}</li>
+                          <li>Air Quality : ${res.currentWeatherData.airQuality}</li>
+                      </ul>
+                    </div>
+                  </div>
+                  
+                  <div class="country-data">
+                      <h3>${res.countryData.countryName}</h3>
+                      <p>${res.countryData.countryName} is in ${res.countryData.region} and has a population of over ${res.countryData.population}, with ${res.countryData.primaryLanguage} as the country's most commonly spoken language.</p>
+                      <p>Capital: ${res.countryData.capital}</p>
+                      <p>Currency : ${res.countryData.currency}</p>
+                  </div>
                 </div>`;
 
   documentFragment.appendChild(weatherListDocumentFragment);
+  if (weatherForecastSection.childElementCount > 0) {
+    weatherForecastSection.innerHTML = "";
+  }
+  console.log();
   weatherForecastSection.appendChild(documentFragment);
 }
 
 function createWeatherForecastDiv(res) {
   console.log("in weatherForecaseDiv");
+  weatherForecastSection.setAttribute("class", "weather-list-class");
+  console.log(weatherForecastSection.children);
   let weatherListDocumentFragment = document.createDocumentFragment();
 
   const obj = res.weatherForecastDataObj;
 
   for (const property in obj) {
     let div = document.createElement("div");
-    div.innerHTML = `<h4>Date: ${obj[property].date}</h4>
-    <h4>Description: ${obj[property].description}</h4>
-    <h4>Precipitation chance: ${obj[property].precipitationChances}</h4>
-    <h4>Temperature: ${obj[property].temperature}</h4>
-    <h4>Visibility: ${obj[property].visibility}</h4>`;
+    div.setAttribute("class", "weather-list-div");
+    div.innerHTML = `<h6>Date: ${obj[property].date}</h6>
+    <ul>
+      <li>Description: ${obj[property].description}</li>
+      <li>Precipitation chance: ${obj[property].precipitationChances}</li>
+      <li>Temperature: ${obj[property].temperature}</li>
+      <li>Visibility: ${obj[property].visibility}</li>
+    </ul>`;
 
     weatherListDocumentFragment.appendChild(div);
   }
@@ -62,11 +78,12 @@ function updateUIForError(err) {
   weatherForecastSection.style.display = "none";
   console.log(err);
   responseSection.innerHTML = ` <div id="error">
-    <h3>We are sorry! This shouldn't have happened</h3>
-    <ul>Please make sure the following
-      <li>Valid Date is entered within the provided limit.</li>
-      <li>Valid city name entered</li>
-      <li>We might not have the data for the provided city</li>
+    <h3>We are sorry! This shouldn't have happened! While we try to fix it, make sure you are following the correct protocol. Thank you!  </h3>
+    <ul>
+      <li>Valid Date(YYYY-MM-DD, Y = Year, M = Month, D = Date) is entered within the provided limit.</li>
+      <li>Valid city name is entered</li>
+      <li>Please check the internet connection</li>
+      <li>The city name provided, isn't marked with this. We will soon incorporate this. Thank you! </li>
     </ul> 
   <div>`;
 }

@@ -4,6 +4,7 @@ var HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
+const WorkboxPlugin = require("workbox-webpack-plugin");
 
 module.exports = {
   mode: "production",
@@ -24,7 +25,17 @@ module.exports = {
         use: {
           loader: "babel-loader",
           options: {
-            presets: ["@babel/preset-env"],
+            presets: [
+              [
+                "@babel/preset-env",
+                {
+                  useBuiltIns: "usage", // alternative mode: "entry"
+                  corejs: 3, // default would be 2
+                  targets: "> 0.25%, not dead",
+                  // set your own target environment here (see Browserslist)
+                },
+              ],
+            ],
           },
         },
       },
@@ -40,5 +51,6 @@ module.exports = {
       filename: "./index.html",
     }),
     new MiniCssExtractPlugin({ filename: "[name].css" }),
+    new WorkboxPlugin.GenerateSW(),
   ],
 };

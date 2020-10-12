@@ -1,0 +1,54 @@
+.weather-list-class {
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  border: 0.007px solid #d6e0f0;
+  border-radius: 2px;
+  width: 90%;
+  padding: 1em;
+  margin: 1em auto;
+}
+
+.weather-list-div {
+  box-shadow: 1px 1px 1em #d6e0f0;
+  border-radius: 2px;
+  padding: 0.4em;
+  margin: 0em 1em 0.5em 0em;
+
+  h6 {
+    text-align: center;
+    margin: 1em 0em 0em 0em;
+  }
+
+  ul {
+    padding-left: 1.8em;
+  }
+}
+
+@media (max-width: 800px) {
+  .weather-list-class {
+    grid-template-columns: 1fr 1fr 1fr;
+    border: 0.007px solid #d6e0f0;
+    border-radius: 2px;
+    width: 90%;
+    padding: 1em;
+    margin: 1em auto;
+
+    li {
+      font-size: 0.8em;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .weather-list-class {
+    grid-template-columns: 1fr 1fr;
+    border: 0.007px solid #d6e0f0;
+    border-radius: 2px;
+    width: 90%;
+    padding: 1em;
+    margin: 1em auto;
+
+    li {
+      font-size: 0.6em;
+    }
+  }
+}
