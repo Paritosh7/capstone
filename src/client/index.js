@@ -1,6 +1,9 @@
 import { handleSubmit } from "./js/formHandler";
 import { updateUIForValidResponse, updateUIForError } from "./js/uiUpdater";
-import { minMaxDateString, numberOfDaysLeft } from "./js/dateDaysUtility";
+import {
+  minMaxDateCompressedString,
+  numberOfDaysLeft,
+} from "./js/dateDaysUtility";
 import {
   addDateSpanNote,
   crossBrowserDateValidation,
@@ -16,17 +19,19 @@ import "./styles/multiple-weather-card.scss";
  *  - getting today's date again, to
  *    calculate the max date allowed from today.
  */
-let form = document.getElementById("form");
-let minDate = new Date();
-let maxDate = new Date();
+const form = document.getElementById("form");
+const minDate = new Date();
+const maxDate = new Date();
 
 /** calculating the max Date allowed - 16days */
 maxDate.setDate(new Date().getDate() + 15);
 
-/** calling minMaxDateString to get the entire String
+/** calling minMaxDateString to get the
  *  minimum and maximum date allowed.
+ *  - used for cross browser (eg. Safari) date message.
+ *  - used for setting the Date's min and max attribute.
  */
-let datesArr = minMaxDateString(minDate, maxDate);
+let datesArr = minMaxDateCompressedString(minDate, maxDate);
 
 /** for cross browser rendering, unsupported browser will
  * fallback to text, when trying to set the type of input
@@ -49,22 +54,25 @@ if (test.type === "text") {
     eve.preventDefault();
     let inputDate = document.getElementById("date").value;
     if (crossBrowserDateValidation(inputDate, minDate, maxDate)) {
-      handleSubmit(eve);
+      const daysLeft = numberOfDaysLeft(minDate, inputDate);
+      handleSubmit(eve, inputDate, daysLeft);
     } else {
       updateUIForError("Date isn't correct");
     }
   });
 
-  /** supported browser, so can set the min and max date
+  /** supported browser, so can set the date's min and max
    * attribute, further calling handleSubmit.
    */
 } else {
-  let dateInput = document.getElementById("date");
-  dateInput.setAttribute("min", datesArr[0]);
-  dateInput.setAttribute("max", datesArr[1]);
+  let dateElement = document.getElementById("date");
+  dateElement.setAttribute("min", datesArr[0]);
+  dateElement.setAttribute("max", datesArr[1]);
   form.addEventListener("submit", (eve) => {
     eve.preventDefault();
-    handleSubmit(eve);
+    let inputDate = document.getElementById("date").value;
+    const daysLeft = numberOfDaysLeft(minDate, inputDate);
+    handleSubmit(eve, inputDate, daysLeft);
   });
 }
 

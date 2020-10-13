@@ -4,6 +4,9 @@ function addDateSpanNote(minDate, maxDate) {
   ).innerHTML = `<i>Please select a date between ${minDate} & ${maxDate} in the correct format YYYY-MM-DD</i>`;
 }
 
+/** In an unsupported browser (eg. Safari) the user can enter an invalid
+ * date, therefore this function checks the date
+ */
 function crossBrowserDateValidation(inputDate, minDate, maxDate) {
   let date = new Date(inputDate);
 
@@ -15,8 +18,6 @@ function crossBrowserDateValidation(inputDate, minDate, maxDate) {
     minDate.getMilliseconds()
   );
 
-  console.log(date);
-  console.log(minDate);
   if (
     date.getTime() < minDate.getTime() ||
     date.getTime() > maxDate.getTime()
