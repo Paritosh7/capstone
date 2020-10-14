@@ -12,8 +12,6 @@ async function fetchResponse(destination, date, days) {
   const long = coordinatesData.lng;
   const dateDays = { date: date, days: days };
 
-  console.log(lat);
-
   /** all are async calls */
   const currentWeatherData = await fetchCurrentWeatherData(lat, long);
   const weatherForecastData = await fetchWeatherForecast(lat, long);

@@ -29,6 +29,10 @@ Also, this project supports cross browser rendering for Date used. For ex. Safar
 - Further optimising the code using OptimizeCSSAssetsPlugin and TerserPlugin
 - Adding service workers for offline functionality
 
+## Extended Feature (Requirement)
+
+- Integrate the [REST Countries API](https://restcountries.eu/) to pull in data for the country being visited.
+
 ## Installation
 
 First clone the project. Then in the root directory of your project open terminal run

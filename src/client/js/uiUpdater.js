@@ -64,9 +64,7 @@ function updateUIForValidResponse(res) {
  *  and further populated.
  */
 function createWeatherForecastDiv(res) {
-  console.log("in weatherForecaseDiv");
   weatherForecastSection.setAttribute("class", "weather-list-class");
-  console.log(weatherForecastSection.children);
   let weatherListDocumentFragment = document.createDocumentFragment();
 
   const obj = res.weatherForecastDataObj;
@@ -84,7 +82,6 @@ function createWeatherForecastDiv(res) {
 
     weatherListDocumentFragment.appendChild(div);
   }
-  console.log(weatherListDocumentFragment.children);
   return weatherListDocumentFragment;
 }
 
